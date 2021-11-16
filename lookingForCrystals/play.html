@@ -1,0 +1,197 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src ="jquery/jquery-2.1.0.js" type="text/javascript"></script>
+		<script src="jquery/jquery.min.js"></script>
+		<script src="jquery/jquery-ui.min.js"></script>
+		<link rel="stylesheet" href="jquery/jquery-ui.css"> 
+		<link rel="stylesheet" href="jquery/default.css">  
+		<link  href="кристалл.png">  
+		<title>В ПОИСКАХ КРИСТАЛЛОВ 1.0</title>
+	</head>
+	<body>
+		<canvas id = "canvas" width = "700" height = "400"></canvas>
+		<h2 id = "kristall"></h2>
+		<h4 class = "text_time"></h4>
+		<script id = "s">
+			//"use strict"
+			var canvas = document.getElementById("canvas"), ctx = canvas.getContext("2d"), min = 0,
+			sec = 0, blockSize = 10, shkala = {kristal: 0, stena: 0}, circle, stena = [],
+			stena_color = "#FFDD57", border ="#FF7F00", block, col, row, flag = 1, circleblock;
+			function buttons (s1, s2, s3){
+				$("body").append($("<button  class = '" + s1 + "'>" + s2 + "</button>"))
+				$("button").click(s3)
+			}
+			function Dialog(s1, s2){
+				$("#dialog").addClass("spam_dialog").text(s1).dialog({
+					title: s2,
+					modal: true, 
+					beforeClose: function() { flag = 1; count()}
+				})
+			}
+			circle = function (x, y, radius, fillCircle){
+				ctx.beginPath();
+				ctx.arc(x, y, radius, 0, Math.PI * 2, false);
+				if (fillCircle) 
+					ctx.fill()
+			}
+			class Block{
+				constructor(col,row){
+					this.col = col;
+					this.row = row;
+				}
+				drawCircle(color){
+					var centerX = this.col * blockSize + blockSize / 2;
+					var centerY = this.row * blockSize + blockSize / 2;
+					ctx.fillStyle = color;
+					circle(centerX, centerY, blockSize / 2, true)
+				}
+				equal(otherBlock){
+					if(this.col === otherBlock.col && this.row === otherBlock.row){
+						Random();
+						return true
+					}	
+				}
+				drawSquare(color){
+					var x = this.col * blockSize;
+					var y = this.row * blockSize;
+					ctx.fillStyle = color;
+					ctx.fillRect(x, y, blockSize, blockSize)
+				}
+				clear(){
+					block.oldcol = this.col;
+					block.oldrow = this.row;
+					ctx.clearRect(this.col * blockSize, this.row * blockSize, blockSize, blockSize)
+				}
+				napravleniya(dv){
+					switch (dv){
+						case 37: col = this.col --; break;
+						case 38: row = this.row --; break;
+						case 39: col = this.col ++; break;
+						case 40: row = this.row ++; break;
+						default : col = this.col ; row = this.row
+					}
+				}
+				checkColision(){
+					for(var i = 0; i < stena.length; i++){
+						if ((this.col == stena[i].col) && (this.row == stena[i].row))
+							return true
+					}	
+				}
+			}			
+			block = new Block (2,3);
+			function for_x(a_1, a_2, a_3, a_4, a_5 = 0){
+				for (; a_1 <= a_3; a_1++){
+					if(a_5){
+						new Block (a_1, a_2).drawSquare(a_4);
+						stena.push(new Block (a_1, a_2))
+					}else{
+						new Block (a_2, a_1).drawSquare(a_4);
+						stena.push(new Block(a_2, a_1))
+					}
+				}
+			}
+			function Rooms (){
+				for_x(1, 15, 22, stena_color, 1);
+				for_x(26, 15, 38, stena_color, 1);
+				for_x(39, 25, 50, stena_color, 1);
+				for_x(54, 25, 68, stena_color, 1);
+				for_x(50, 15, 68, stena_color, 1);
+				for_x(15, 39, 38, stena_color);
+				for_x(1, 15, 5, stena_color);
+				for_x(9, 15, 14, stena_color);
+				for_x(1, 49, 6, stena_color);
+				for_x(10, 49, 15, stena_color);
+				for_x(0, 0, 70, border, 1);
+				for_x(0, 39, 70, border, 1);
+				for_x(0, 0, 38, border);
+				for_x(0, 69, 38, border)
+			}
+			function Random (){
+				var x = Math.floor(Math.random() * (canvas.width / blockSize - 2)) + 1;
+				var y = Math.floor(Math.random() * (canvas.height / blockSize - 2)) + 1;
+				circleblock = new Block(x, y)
+				if(circleblock.checkColision())
+					Random()
+			}
+			function upgrade () {
+				$("#kristall").text("Кристалы = " + shkala.kristal + ", столкновения = " + shkala.stena)
+			}
+			function count() {
+				sec++	
+				if (sec < 10)
+					 $("h4").text("Ваше время : 0" + min + ":0" +  sec )
+				else
+					$("h4").text("Ваше время : 0" + min + ":" +  sec) 
+				if (sec == 59){
+					min++;
+					sec = 0
+				}
+				if (min == 2 && sec == 30)
+					gameOver();	
+				if(flag)
+					setTimeout(count, 1000)
+			}
+			function gameOver (){
+				document.getElementById("dialog").title = "Время";
+				flag = 0
+				if (min == 0)
+					Dialog("Ваше время  " + sec + " сек.", 'Конец игры')
+				else 
+					Dialog("Ваше время  " + min + " мин. " + sec + " сек.", 'Конец игры')
+					setTimeout(function (){location.reload()} , 2000);
+			}
+			buttons("button_play", "Играть", function (){				
+				$("button").fadeOut(100) 
+				$("body").keydown(function  (event) {
+					if(flag){
+						block.clear();
+						block.napravleniya(event.keyCode)
+						if (shkala.kristal >= 10)
+							gameOver()
+						if(block.checkColision()){
+							shkala.stena++;
+							block.col = block.oldcol;
+							block.row = block.oldrow;
+							upgrade()
+							if(shkala.stena >= 5)
+								gameOver()
+						}
+						block.drawSquare("Red");
+						if(circleblock.equal(block)){
+							shkala.kristal++;
+							upgrade();
+							Random();
+							circleblock.drawCircle("Blue")
+						}
+					}
+				});
+				Random ();
+				count();
+				circleblock.drawCircle("Blue");
+				block.drawSquare("Red");
+				Rooms();
+				upgrade ();
+				buttons("button_pause","Пауза", function (){
+					Dialog("Вы на паузе!", 'Пауза'); flag = 0
+				})
+			})
+			document.getElementById("s").innerHTML = " ";
+			
+		</script>
+		<div id="dialog" title = "Пауза"></div>
+		<h2><pre>
+
+
+
+
+
+
+
+
+	БЛАГОДАРНОСТИ: НИКУ МОРГАНУ(САМОУЧИТЕЛЬ ПО ПРОГРАММИРОВАНИЮ), 
+			ИГОРЮ БОРИСОВУ ПРЕПОДАВАТЕЛЮ КОМПЬЮТЕРНОГО ЦЕНТРА "СПЕЦИАЛИСТ" 
+				И МОЕМУ ПАПЕ !
+	ПРИ ОШИБКЕ НАЖМИТЕ F5</pre></h2>
+	</body>
+</html>

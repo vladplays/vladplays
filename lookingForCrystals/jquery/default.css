@@ -1,0 +1,100 @@
+.modal {
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #FFE581;
+	opacity: 60;
+	visibility: hidden;
+	transform: scale(1.1);
+	transition: visibility 0s linear 0.1s, opacity 0.1s 0s, transform 0.25s;
+}
+.modal-content {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-family: Segoe UI, Arial, sans-serif;
+	color : #A68A1C;
+	background-color: #FFDD57;
+	border:2px solid #BFAC61;
+	padding: 1rem 1.5rem;
+	width: 20rem;
+	border-radius: 0.5rem;
+}
+.close-button {
+	float: right;
+	width: 1rem;
+	line-height: 1.5rem;
+	padding: 0.5rem;
+	text-align: center;
+	cursor: pointer;
+	border-radius: 8px;
+	background-color: #FFDD57;
+}
+.close-button:hover {
+	background-color: #FFE581;
+	border:2px solid #BFAC61;
+}
+.show-modal {
+	opacity: 1;
+	visibility: visible;
+	transform: scale(1.0);
+	transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+}
+#kristall {
+	font-size: 1em;
+}
+h2, .button_pause, .button_about, .button_play, .text_time, .spam_dialog {
+	font-family: Segoe UI, Arial, sans-serif;
+	color : #555;
+}
+#game_over {
+	text-align: center;
+	font-size: 2.5em;
+	color : #FF7F00;
+}
+.button_pause, .button_about, .button_play, .text_time, .spam_dialog {
+	font-size: 1em;
+}
+.spam_dialog {
+	font-weight: bold;
+}
+.button_play, .button_about, .button_pause {	
+	font-weight: bold;
+	border-radius:5px;
+	border:2px solid #FF7F00;
+	padding: .3em .3em .3em .5em;
+	opacity: 0.7;
+	background: #FFDD57;
+}
+.button_play {
+	position: absolute;
+	left: 200;
+	top: 190
+}
+.button_pause {
+	position: absolute;
+	left: 640;
+	top: 420
+}
+.button_about {
+	position: absolute;
+	left: 540;
+	top: 420
+}
+
+ .button_play:hover, .button_about:hover, .button_pause:hover {
+	color : #4c3000;
+	border:2px solid #FFDD57;
+	background: #FF7F00;
+	opacity: 0.7;
+
+}
+button:active, button:focus {
+	outline: none;
+}
+button::-moz-focus-inner {
+	border: 0;
+}
