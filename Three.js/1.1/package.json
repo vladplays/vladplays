@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "express": "^3.4.4",
+    "three-shader-fxaa": "^5.1.1"
+  }
+}
