@@ -1,5 +1,5 @@
 try{
-	let status='development';//development or product
+	let status='product';//development or product
 	
 	let closing=true
 	
