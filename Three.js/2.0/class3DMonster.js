@@ -10,7 +10,7 @@ class Monster3D{
 	}
 	draw(position, type){
 		this.pos=position
-		loadModel('/'+this.model[position]+'.gltf', (object)=>{
+		loadModel('./'+this.model[position]+'.gltf', (object)=>{
 			object=object.scene;
 			
 			if(type=='down'){
