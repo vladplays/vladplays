@@ -66,7 +66,7 @@
 			scene.add(cube);
 		}*/
 		
-		loadModel('/Obj.glb', function(object){
+		loadModel('./Obj.glb', function(object){
 			object=object.scene
 			object.position.y=-180
 			object.position.z-=10
