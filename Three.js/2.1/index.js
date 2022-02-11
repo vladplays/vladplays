@@ -3,7 +3,7 @@
 	
 	let sc;
 	let audios=[];
-	let status='development';//development or product
+	let status='product';//development or product
 	let first=true
 	let positionAudio=[];
 	let isAudioMonsters=[];
@@ -94,7 +94,7 @@
 	document.getElementById('yes').onclick=function(){
 		
 		sc=new Scenes()
-		sc.add('lift', '/lift.glb', function(){
+		sc.add('lift', './lift.glb', function(){
 			camera.rotation.x= 0.004483431145124377
 			camera.rotation.y= -0.07900587099273684
 			camera.rotation.z= 0.0003538513539429651
@@ -104,7 +104,7 @@
 			lightTest.position.x=camera.position.x+10;
 			lightTest.lookAt(camera.position)
 			let count=false
-			let a2=new Audio('/lift.mp3')
+			let a2=new Audio('./lift.mp3')
 			if(!back){
 				img.style.display='none'
 				if(!isMute){
@@ -116,14 +116,14 @@
 							a2.play()
 					}
 					if(first){
-						let a=new Audio('/Record.mp3')
+						let a=new Audio('./Record.mp3')
 						a.play()
 						a.onended=()=>{
 							count=true
 							machine()
 							
 							a2.pause()
-							let a3=new Audio('/openDoors.mp3')
+							let a3=new Audio('./openDoors.mp3')
 							a3.play()
 							scene.remove(lightTest)
 							//sc.scene('update')
@@ -133,7 +133,7 @@
 						setTimeout(function(){
 							count=true
 							machine()
-							let a3=new Audio('/openDoors.mp3')
+							let a3=new Audio('./openDoors.mp3')
 							a3.play()
 							scene.remove(lightTest)
 						}, 15000)
@@ -261,7 +261,7 @@
 			scene.add(cube);
 		}*/
 		//controls.lock()
-		loadModel('/Obj.glb', function(object){
+		loadModel('./Obj.glb', function(object){
 			object=object.scene
 			object.position.y=-180
 			object.position.z-=10
@@ -276,7 +276,7 @@
 			
 			
 		});
-		loadModel('/knopka.glb', function(object){
+		loadModel('./knopka.glb', function(object){
 			object=object.scene;
 			object.traverse(function(e){
 				e.name='knopka'
