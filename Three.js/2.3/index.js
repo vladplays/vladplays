@@ -615,7 +615,7 @@ document.getElementById('yes').onclick=function(){
 	
 	
 	document.body.onclick=function(event){
-		controls.lock()
+		//controls.lock()
 		
 		let raycaster = new THREE.Raycaster();
 		let mouse=new THREE.Vector2();
