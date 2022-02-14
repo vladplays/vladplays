@@ -381,7 +381,7 @@ document.getElementById('yes').onclick=function(){
 		scene.add(cube);
 	}*/
 	//controls.lock()
-	loadModel('/Obj.glb', function(object){
+	loadModel('./Obj.glb', function(object){
 		object=object.scene
 		object.position.y=-180
 		object.position.z-=10
@@ -396,7 +396,7 @@ document.getElementById('yes').onclick=function(){
 		
 		
 	});
-	loadModel('/knopka.glb', function(object){
+	loadModel('./knopka.glb', function(object){
 		object=object.scene;
 		object.traverse(function(e){
 			e.name='knopka'
