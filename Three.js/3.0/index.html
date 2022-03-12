@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>d</title>
+		<style>
+			body, html{
+				margin:0px;
+				padding:0px
+			}
+			*{
+				overflow:hidden;
+			}
+			.smartPhone{
+				display:none;
+				border-radius:5px;
+				border:1px solid black;
+				width:1000px;
+				height:1000px;
+				position:absolute;
+				top:10%;
+				left:10%;
+				background:rgb(11, 95, 165);
+			}
+			#screen{
+				background:black;
+				position:absolute;
+			}
+		</style>
+	</head>
+	<body>
+		<div id='screen'></div>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" defer>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js" defer></script>
+		<script src="https://cdn.rawgit.com/mrdoob/three.js/master/examples/js/loaders/GLTFLoader.js" defer></script>
+		<button id='play' class="waves-effect waves-light btn">play</button>
+		<div id='check'>
+			<img src='Strelka.png' id='strelka'/>
+			<div id='checkList' class='smartPhone'>
+				<p>Кря!Кря</p>
+			</div>
+		</div>
+		<script src='PointerLockControls.js'defer> </script>
+		<script src='canvas.js'defer></script>
+		<script src='index.js' defer></script>
+		
+	</body>
+</html>
